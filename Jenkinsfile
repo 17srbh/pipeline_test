@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Clone') {
       steps {
-        git url: 'git@github.com:your-user/hello-js-app.git', branch: 'main'
+        git url: 'https://github.com/17srbh/pipeline_test.git'', branch: 'main'
       }
     }
 
