@@ -12,6 +12,7 @@ pipeline {
             ssh-keyscan github.com >> ~/.ssh/known_hosts
             git clone git@github.com:17srbh/pipeline_test.git
           '''
+       } 
       }
     }
 
