@@ -4,7 +4,14 @@ pipeline {
   stages {
     stage('Clone') {
       steps {
-        git url: 'git@github.com:17srbh/pipeline_test.git', branch: 'main'
+         withCredentials([sshUserPrivateKey(credentialsId: 'github-ssh-key', keyFileVariable: 'SSH_KEY')]) {
+          sh '''
+            mkdir -p ~/.ssh
+            cp $SSH_KEY ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            git clone git@github.com:17srbh/pipeline_test.git
+          '''
       }
     }
 
