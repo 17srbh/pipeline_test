@@ -40,10 +40,10 @@ pipeline {
           sh '''
               if docker service inspect hello-js-service > /dev/null 2>&1; then
                 echo "Service exists. Updating..."
-                docker service update --force --image hello-js-app:latest hello-js-service
+                docker service update --force --image srbhdockerhub1st/hello-js-app:latest hello-js-service
               else
                 echo "Service not found. Creating..."
-                docker service create --name hello-js-service --publish 8081:80 hello-js-app:latest
+                docker service create --name hello-js-service --publish 8081:80 srbhdockerhub1st/hello-js-app:latest
               fi
         '''
       }
