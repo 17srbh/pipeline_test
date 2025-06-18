@@ -10,6 +10,7 @@ pipeline {
             cp $SSH_KEY ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
             ssh-keyscan github.com >> ~/.ssh/known_hosts
+            rm -rf pipeline_test
             git clone git@github.com:17srbh/pipeline_test.git
           '''
        } 
