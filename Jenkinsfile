@@ -20,6 +20,7 @@ pipeline {
     stage('Docker Build') {
       steps {
         sh 'docker build -t hello-js-app .'
+        sh 'docker tag hello-js-app:latest srbhdockerhub1st/hello-js-app:latest'
       }
     }
 
