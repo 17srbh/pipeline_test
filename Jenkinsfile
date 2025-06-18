@@ -25,7 +25,6 @@ pipeline {
 
    stage('Deploy / Update Service') {
       steps {
-        sh '''
           sh '''
               if docker service inspect hello-js-service > /dev/null 2>&1; then
                 echo "Service exists. Updating..."
