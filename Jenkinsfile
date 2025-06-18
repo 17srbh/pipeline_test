@@ -26,14 +26,14 @@ pipeline {
    stage('Deploy / Update Service') {
       steps {
         sh '''
-          docker service inspect hello-js-service >/dev/null 2>&1
-          if [ $? -eq 0 ]; then
-            docker service update --force --image hello-js-app:latest hello-js-service
-          else
-            docker service create --name hello-js-service \
-              --publish 8081:80 \
-              hello-js-app:latest
-          fi
+          sh '''
+              if docker service inspect hello-js-service > /dev/null 2>&1; then
+                echo "Service exists. Updating..."
+                docker service update --force --image hello-js-app:latest hello-js-service
+              else
+                echo "Service not found. Creating..."
+                docker service create --name hello-js-service --publish 8081:80 hello-js-app:latest
+              fi
         '''
       }
     }
