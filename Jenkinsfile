@@ -23,9 +23,18 @@ pipeline {
       }
     }
 
-    stage('Deploy to Swarm') {
+   stage('Deploy / Update Service') {
       steps {
-        sh 'docker stack deploy -c docker-compose.yml hello-stack'
+        sh '''
+          docker service inspect hello-js-service >/dev/null 2>&1
+          if [ $? -eq 0 ]; then
+            docker service update --force --image hello-js-app:latest hello-js-service
+          else
+            docker service create --name hello-js-service \
+              --publish 8081:80 \
+              hello-js-app:latest
+          fi
+        '''
       }
     }
   }
